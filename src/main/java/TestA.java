@@ -11,8 +11,8 @@ import java.util.List;
  * 类说明
  */
 public class TestA {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader("D:/argorithm4/3/collinear/input20.txt"));
+    public static void main1(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader("D:/argorithm4/3/collinear/input8.txt"));
         System.out.println(br.readLine());
         List<Point> points = new ArrayList<>();
         while (true) {
@@ -32,5 +32,9 @@ public class TestA {
         System.out.println("segments:" + fcp.numberOfSegments());
         System.out.println("结果:" + Arrays.deepToString(fcp.segments()));
         br.close();
+    }
+    public static void main(String[] args) {
+        Point p1 = new Point(1, 2);
+        System.out.println(p1.compareTo(null));
     }
 }

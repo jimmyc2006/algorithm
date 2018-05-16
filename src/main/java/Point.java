@@ -1,6 +1,7 @@
 import java.util.Comparator;
 
 import edu.princeton.cs.algs4.StdDraw;
+
 /**
  * @author shuwei
  * @version 创建时间：2018年2月5日 下午8:36:25 类说明
@@ -37,35 +38,55 @@ public class Point implements Comparable<Point> {
      * @param that the other point
      */
     public void drawTo(Point that) {
+        if (that == null) {
+            throw new IllegalArgumentException();
+        }
         /* DO NOT MODIFY */
         StdDraw.line(this.x, this.y, that.x, that.y);
     }
 
     /**
      * Returns the slope between this point and the specified point. Formally, if the two points are
-     * (x0, y0) and (x1, y1), then the slope is (y1 - y0) / (x1 - x0). For completeness, the slope
-     * is defined to be +0.0 if the line segment connecting the two points is horizontal;
-     * Double.POSITIVE_INFINITY if the line segment is vertical; and Double.NEGATIVE_INFINITY if
-     * (x0, y0) and (x1, y1) are equal.
+     * (x0, y0) and (x1, y1), then the slope is (y1 - y0) / (x1 - x0). For completeness, the slope is
+     * defined to be +0.0 if the line segment connecting the two points is horizontal;
+     * Double.POSITIVE_INFINITY if the line segment is vertical; and Double.NEGATIVE_INFINITY if (x0,
+     * y0) and (x1, y1) are equal.
      *
      * @param that the other point
      * @return the slope between this point and the specified point
      */
     public double slopeTo(Point that) {
-        return  (double)(that.y - this.y) / (that.x - this.x);
+        if (that == null) {
+            throw new IllegalArgumentException();
+        }
+        int xDiff = that.x - this.x;
+        int yDiff = that.y - this.y;
+        if (xDiff == 0 && yDiff == 0) {
+            return Double.NEGATIVE_INFINITY;
+        }
+        if (yDiff == 0) {
+            return +0.0;
+        }
+        if (xDiff == 0) {
+            return Double.POSITIVE_INFINITY;
+        }
+        return (double) yDiff / xDiff;
     }
 
     /**
-     * Compares two points by y-coordinate, breaking ties by x-coordinate. Formally, the invoking
-     * point (x0, y0) is less than the argument point (x1, y1) if and only if either y0 < y1 or if
-     * y0 = y1 and x0 < x1.
+     * Compares two points by y-coordinate, breaking ties by x-coordinate. Formally, the invoking point
+     * (x0, y0) is less than the argument point (x1, y1) if and only if either y0 < y1 or if y0 = y1 and
+     * x0 < x1.
      *
      * @param that the other point
-     * @return the value <tt>0</tt> if this point is equal to the argument point (x0 = x1 and y0 =
-     *         y1); a negative integer if this point is less than the argument point; and a positive
-     *         integer if this point is greater than the argument point
+     * @return the value <tt>0</tt> if this point is equal to the argument point (x0 = x1 and y0 = y1);
+     *         a negative integer if this point is less than the argument point; and a positive integer
+     *         if this point is greater than the argument point
      */
     public int compareTo(Point that) {
+        if (that == null) {
+            throw new IllegalArgumentException();
+        }
         if (this.y > that.y) {
             return 1;
         } else if (this.y < that.y) {
@@ -73,7 +94,7 @@ public class Point implements Comparable<Point> {
         } else {
             if (this.x > that.x) {
                 return 1;
-            } else if(this.x < that.x) {
+            } else if (this.x < that.x) {
                 return -1;
             } else {
                 return 0;
@@ -88,7 +109,7 @@ public class Point implements Comparable<Point> {
      * @return the Comparator that defines this ordering on points
      */
     public Comparator<Point> slopeOrder() {
-        return new Comparator<Point>(){
+        return new Comparator<Point>() {
             @Override
             public int compare(Point o1, Point o2) {
                 if (slopeTo(o1) < slopeTo(o2)) {
@@ -104,8 +125,8 @@ public class Point implements Comparable<Point> {
 
 
     /**
-     * Returns a string representation of this point. This method is provide for debugging; your
-     * program should not rely on the format of the string representation.
+     * Returns a string representation of this point. This method is provide for debugging; your program
+     * should not rely on the format of the string representation.
      *
      * @return a string representation of this point
      */
